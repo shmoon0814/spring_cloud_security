@@ -1,4 +1,4 @@
-package m.s.h.cloudserver;
+package m.s.h.cloudserver.controller;
 
 import m.s.h.cloudserver.model.Result;
 import m.s.h.cloudserver.service.LoginService;
