@@ -21,7 +21,7 @@ import java.util.Properties;
 public class JpaConfig {
 
     @Bean(name = "jpaDataSource")
-    public DriverManagerDataSource jpaDataSource(){
+    public DriverManagerDataSource jpaDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
         dataSource.setUrl("jdbc:mariadb://localhost:3306/authentication");
@@ -34,7 +34,7 @@ public class JpaConfig {
     public LocalContainerEntityManagerFactoryBean jpaEntityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(jpaDataSource());
-        em.setPackagesToScan(new String[] {"m.s.h.cloudserver.model"});
+        em.setPackagesToScan(new String[]{"m.s.h.cloudserver.model"});
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(additionalProperties());
@@ -43,14 +43,14 @@ public class JpaConfig {
 
     @Bean(name = "jpaTransactionManager")
     public PlatformTransactionManager jpaTransactionManager(
-            EntityManagerFactory emf){
+            EntityManagerFactory emf) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
     }
 
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
@@ -63,7 +63,7 @@ public class JpaConfig {
     }
 
     @Bean
-    public JpaResultMapper jpaResultMapper(){
+    public JpaResultMapper jpaResultMapper() {
         return new JpaResultMapper();
     }
 

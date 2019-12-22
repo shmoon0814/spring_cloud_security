@@ -28,7 +28,7 @@ public class LoginService {
     @Autowired
     LoginHistoryRepository loginHistoryRepository;
 
-    public Result join(String email, String nick_name, String password){
+    public Result join(String email, String nick_name, String password) {
         //TODO Validaiton Check
 
         Members members = new Members();
@@ -42,10 +42,10 @@ public class LoginService {
 
     public Result login(String email, String password) {
         Members members = memberRepository.loadbyemail(email);
-        if(members == null){
+        if (members == null) {
             return new Result(666, null, "해당 이메일은 가입하지 않았습니다.");
         }
-        if(passwordEncoder.matches(password, members.getPassword() )){
+        if (passwordEncoder.matches(password, members.getPassword())) {
             Map<String, Object> token_map = new HashMap<>();
 
             String access_token = jwtTokenUtil.doGenerateToken(members);
@@ -59,7 +59,7 @@ public class LoginService {
             loginHistory.setUser_id(members.getId());
             loginHistoryRepository.save(loginHistory);
             return new Result(200, token_map, null);
-        }else{
+        } else {
             return new Result(427, null, "Password is Wrong");
         }
 

@@ -1,11 +1,9 @@
 package m.s.h.cloudserver.security;
 
-import com.nimbusds.jose.proc.SingleKeyJWSKeySelector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception{
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .exceptionHandling().authenticationEntryPoint(authErrorEntryPoint).and()
                 .authorizeRequests()
@@ -45,14 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web
                 .ignoring()
                 .antMatchers(
-                        HttpMethod.POST,
                         "/auth/v1/login",
-                        "/auth/v1/join"
-                )
-                .and()
-                .ignoring()
-                .antMatchers(
-                        HttpMethod.GET,
+                        "/auth/v1/join",
                         "/auth/test",
                         "/swagger-ui.html",
                         "/swagger-ui.html/**/*",
@@ -62,7 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-resources/**",
                         "/swagger-resources/**/*",
                         "/webjars/**",
-                        "/v2/api-docs"
+                        "/v2/api-docs",
+                        "/",
+                        "/lastn",
+                        "/hystrix", "/hystrix/**", "/eureka/**"
                 );
 
 
